@@ -11,33 +11,36 @@
 # Analyze the text in the clipboard
 function clipboard_analysis {
   # The clipboard analysis is executed in a new Alacritty terminal:
-  alacritty -e zsh -c "clear; \
+  alacritty -e zsh -ic "clear; \
 echo 'Clipboard analysis'; \
 echo 'Analyzing clipboard with model llava'; \
-wl-paste | ollama run llava 'Résume le contenu mon presse papier :' | glow -; \
-read -n1 -s -r -p 'Press any key to exit...'"
+{ wl-paste | ollama run llava 'Résume en francais le contenu mon presse papier :' | glow -; }; \
+read -n1 -s -r -p 'Press any key to exit...' < /dev/tty; \
+exec zsh -f"
 }
 
 # Analyze an image file 
 function visual_analysis {
   clear
   echo "Please choose the image you want to analyze"
-  # File picker remains in the current terminal
   image_path=$(find . -type f -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" | rofi -dmenu -p "Choose an image:")
-  alacritty -e zsh -c "clear; \
+  alacritty -e zsh -ic "clear; \
 echo 'Analyzing image \"$image_path\" with model llava'; \
-ollama run llava \"Décris moi cette image '$image_path'\" | glow -; \
-read -n1 -s -r -p 'Press any key to exit...'"
+{ ollama run llava \"Décris moi en francais cette image '$image_path'\" | glow -; }; \
+read -n1 -s -r -p 'Press any key to exit...' < /dev/tty; \
+exec zsh -f"
 }
 
+# Analyze a text file
 function file_analysis {
   clear
   echo "Please choose the file you want to analyze"
   file_path=$(find . -type f | rofi -dmenu -p "Choose a file:")
-  alacritty -e zsh -c "clear; \
+  alacritty -e zsh -ic "clear; \
 echo 'Analyzing file \"$file_path\" with model llama3.2'; \
-cat '$file_path' | ollama run llama3.2 'Analyse le contenu de fichier et fais en moi un résumé :' | glow -; \
-read -n1 -s -r -p 'Press any key to exit...'"
+{ cat '$file_path' | ollama run llama3.2 'Analyse le contenu de ce fichier et fais en moi un résumé en francais :' | glow -; }; \
+read -n1 -s -r -p 'Press any key to exit...' < /dev/tty; \
+exec zsh -f"
 }
 
 function chat {
