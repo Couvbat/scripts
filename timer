@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This script prompts the user for how long to wait before sending a message to the chat webhook, then prompts for the message to send
+
+# Prompt the user for how long to wait
+echo "Combien de temps attendre ? (en secondes)"
+read sleep
+
+# Prompt the user for the message to send
+echo "Quel message envoyer ?"
+read message
+
+# Sleep for the specified amount of time
+sleep $sleep
+
+# Send the message to the chat webhook
+curl 'https://chat.in-leed.com/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=%22aqEOk8pMMykRQDVb9CLNZQvBOBBOW3q3RWupYB7juMCK4B4vJbd9my8IceGpQJ40%22' -d "payload={\"text\": \"@juleshemery, $message\"}" > /dev/null
+
+# Replace the curl response with a simple echo
+echo "Message envoyé !"
+
+# End of the script

@@ -1,0 +1,134 @@
+/*
+#  ____        __ _  
+# |  _ \ ___  / _(_) 
+# | |_) / _ \| |_| | 
+# |  _ < (_) |  _| | 
+# |_| \_\___/|_| |_| 
+#                    
+# by Stephan Raabe (2023) 
+# ----------------------------------------------------- 
+*/
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "run";
+    font:                       "Fira Sans 11";
+    show-icons:                 false;
+}
+
+/* ---- Load font ---- */
+@import "~/.config/ml4w/settings/rofi-font.rasi"
+
+/* ---- Load pywal colors (custom wal template) ---- */
+@theme "~/.cache/wal/colors-rofi-pywal"
+
+/* ---- Load border width ---- */
+@import "~/.config/ml4w/settings/rofi-border.rasi"
+
+/* ---- Load border radius ---- */
+@import "~/.config/ml4w/settings/rofi-border-radius.rasi"
+
+// Main //
+window {
+    width:                        30em;
+    x-offset:                     -2em;
+    y-offset:                     2em;
+    spacing:                      0px;
+    padding:                      0px;
+    margin:                       0px; 
+    color:                        #FFFFFF;
+    border:                       @border-width;
+    border-color:                 @color11;
+    cursor:                       "default";
+    transparency:                 "real";
+    location:                     northeast;
+    anchor:                       northeast;
+    fullscreen:                   false;
+    enabled:                      true;
+    border-radius:                @border-radius;
+    background-color:             transparent;
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "listview" ];  // Changed from "inputbar" to "listview"
+    background-color:            transparent;
+}
+
+// Listview styling to display assistant options
+listview {
+    enabled:                     true;
+    lines:                       4;    // five options expected
+    spacing:                     0em;
+    padding:                     1em;
+    fixed-height:                25em;
+    background-color:            @background;
+    dynamic:                     true;
+}
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0.5em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+element selected.normal {
+    background-color:            @color11;
+    text-color:                  @foreground;
+    border-radius:               1.5em;
+}
+
+element normal.normal {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element normal.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element normal.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element selected.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element selected.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.normal {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.urgent {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element alternate.active {
+    background-color:            inherit;
+    text-color:                  @foreground;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.1;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
